@@ -15,4 +15,9 @@ class TestController extends Controller
     	$value=Redis::get($key);
     	echo 'value:'.$value;
     	}
+
+    function test2(){
+    	$data=date('Y-m-d h:i:s');
+    	echo $data;
+    }
 }

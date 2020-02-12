@@ -21,3 +21,9 @@ Route::get('/phpinfo', function () {
 
 //测试路由
 Route::get('test/redis','Test\TestController@test');
+Route::get('testtime','Test\TestController@test2');
+//接口路由
+Route::prefix('api')->group(function () {
+	Route::any('userinfo','Api\UserController@userinfo');
+	Route::any('saveuser','Api\UserController@saveuser');
+});
