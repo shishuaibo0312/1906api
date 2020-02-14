@@ -22,10 +22,9 @@ class UserController extends Controller
     	function saveuser(){
     		$data=request()->input();
     		//var_dump($data);
-    		UserModel::insertGetId($data);
-    		echo "自增ID：".$id;die;
-    		if($res){
-    			echo 'ok';
-    		}
+    		$id=UserModel::insertGetId($data);
+    		echo "自增ID:".$id;
     	}
+
+    
 }
