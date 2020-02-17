@@ -26,7 +26,12 @@ Route::any('test3','Test\TestController@test3');
 Route::any('test4','Test\TestController@test4');
 Route::any('test5','Test\TestController@test5');
 Route::any('test6','Test\TestController@test6');
-//接口路由
+Route::any('test7','Test\TestController@test7');
+Route::any('test8','Test\TestController@test8');
+Route::any('test9','Test\TestController@test9');
+Route::any('test10','Test\TestController@test10');
+//测试访问量
+Route::any('goods','Test\GoodsController@goods');	
 Route::prefix('api')->group(function () {
 	Route::any('userinfo','Api\UserController@userinfo');
 	Route::any('saveuser','Api\UserController@saveuser');
