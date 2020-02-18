@@ -32,6 +32,8 @@ Route::any('test9','Test\TestController@test9');
 Route::any('test10','Test\TestController@test10');
 //测试访问量
 Route::any('goods','Test\GoodsController@goods');	
+Route::get('goods2','Test\GoodsController@goods2')->middleware('apibrush');
+Route::get('goods3','Test\GoodsController@goods3')->middleware('apibrush');
 Route::prefix('api')->group(function () {
 	Route::any('userinfo','Api\UserController@userinfo');
 	Route::any('saveuser','Api\UserController@saveuser');
