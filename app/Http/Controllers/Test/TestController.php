@@ -129,4 +129,23 @@ class TestController extends Controller
 		echo "<pre>";	
 		echo "api结束";
 		}
+
+	//测试天气接口
+		function weather(){
+			return view('test.weather');
+		}
+
+		function weather_do(){
+			$city=request()->city;
+			//echo $city;
+			 $url = "http://api.k780.com/?app=weather.future&weaid=" . $city . "&&appkey=47864&sign=292ceb38c08d387cdcdb8a3e5d88a23f&format=json";
+                $data = file_get_contents($url);
+                $data = json_decode($data, true);
+                //var_dump($data);die;
+                $msg = "";
+                foreach ($data['result'] as $k => $v) {
+                    $msg .= $v['days'] . "  " . $v['week'] . "  " . $v['citynm'] . "  " . $v['temperature'] . "\n";
+                }
+                dd($msg);
+		}
 }

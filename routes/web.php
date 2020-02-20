@@ -30,6 +30,15 @@ Route::any('test7','Test\TestController@test7');
 Route::any('test8','Test\TestController@test8');
 Route::any('test9','Test\TestController@test9');
 Route::any('test10','Test\TestController@test10');
+Route::any('test11','Test\TestApi@test1');
+//测试天气接口
+Route::any('weather','Test\TestController@weather');
+Route::any('weather_do','Test\TestController@weather_do');
+//测试签名
+// Route::prefix('apitest')->group(function () {
+// 	Route::any('test1','Test\TestApi@test1');
+// 	//Route::any('saveuser','Api\UserController@saveuser');
+// });
 //测试访问量
 Route::any('goods','Test\GoodsController@goods');	
 Route::get('goods2','Test\GoodsController@goods2')->middleware('apibrush');
