@@ -31,4 +31,17 @@ class TestApi extends Controller
 
 
     	}
+
+    //测试加密与解密
+    	function test2(){
+    		$miwen=$_GET['miwen'];
+    		$length=strlen($miwen);
+    		$yuanwen='';
+    		for ($i=0; $i <$length ; $i++) { 
+    			$yuanwen.=chr(ord($miwen[$i])-3);
+    		}
+    		
+    		echo "原文：".$yuanwen;
+    
+    	}
 }
