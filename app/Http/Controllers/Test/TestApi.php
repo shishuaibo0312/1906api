@@ -32,7 +32,7 @@ class TestApi extends Controller
 
     	}
 
-    //测试加密与解密
+    //测试加密与解密chr   ord
     	function test2(){
     		$miwen=$_GET['miwen'];
     		$length=strlen($miwen);
@@ -42,6 +42,27 @@ class TestApi extends Controller
     		}
     		
     		echo "原文：".$yuanwen;
-    
+    	}
+
+
+    //测试加密与签名
+    	function test3(){
+    		$key='1906';    			 //双方共用的key
+    		$data=$_GET['result'];		 //接受的数据
+    		$data=base64_decode($data);	 //将接受的数据用base64_decode解码
+    		$sign=$_GET['sign'];
+    		$method='aes-128-cbc';  	//加密的方法
+    		$iv='abcdefg123456789';		//保证16个字节
+    		// openssl_decrypt ( string $data , string $method , string $key [, int $options = 0 [, string $iv = "" [, string $tag = "" [, string $aad = "" ]]]] ) : string
+    		$result=openssl_decrypt($data,$method,$key,OPENSSL_RAW_DATA,$iv);
+    		$sign2=md5($key.$result);		//接收方签名
+    		if($sign==$sign2){
+    			echo "验证签名成功  数据完整"."<br>";
+    			echo "base64_encode编码后的数据:".$data."<br>";
+    			echo "接受的数据：".$result;
+    		}else{
+    			echo "验证签名失败  数据损坏";die;
+    		}
+ 
     	}
 }
