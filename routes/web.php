@@ -33,6 +33,7 @@ Route::any('test10','Test\TestController@test10');
 Route::any('test11','Test\TestApi@test1');
 Route::any('test12','Test\TestApi@test2');
 Route::any('test13','Test\TestApi@test3');
+Route::any('test14','Test\TestApi@test4');
 //测试天气接口
 Route::any('weather','Test\TestController@weather');
 Route::any('weather_do','Test\TestController@weather_do');

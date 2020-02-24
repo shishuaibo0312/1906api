@@ -45,7 +45,7 @@ class TestApi extends Controller
     	}
 
 
-    //测试加密与签名
+    //测试加密与签名  对称性加密
     	function test3(){
     		$key='1906';    			 //双方共用的key
     		$data=$_GET['result'];		 //接受的数据
@@ -57,12 +57,23 @@ class TestApi extends Controller
     		$result=openssl_decrypt($data,$method,$key,OPENSSL_RAW_DATA,$iv);
     		$sign2=md5($key.$result);		//接收方签名
     		if($sign==$sign2){
-    			echo "验证签名成功  数据完整"."<br>";
+    			echo "验证签名成功  数据完整"."<br>"; 
     			echo "base64_encode编码后的数据:".$data."<br>";
     			echo "接受的数据：".$result;
     		}else{
-    			echo "验证签名失败  数据损坏";die;
+    			echo "验证签名失败  数据损坏";
     		}
  
+    	}
+
+    //非对称性加密
+    	function  test4(){
+    		$data=$_GET['data'];
+    		$key=file_get_contents(storage_path('keys/priv_wx.key'));		//私钥
+    		//openssl_private_decrypt ( string $data , string &$decrypted , mixed $key [, int $padding = OPENSSL_PKCS1_PADDING ] ) : bool
+    		$data=base64_decode($data);
+    		openssl_private_decrypt($data,$jiemi,$key);
+    		echo "解密的数据为：".$jiemi;
+
     	}
 }
