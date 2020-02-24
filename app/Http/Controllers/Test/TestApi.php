@@ -69,11 +69,39 @@ class TestApi extends Controller
     //非对称性加密
     	function  test4(){
     		$data=$_GET['data'];
-    		$key=file_get_contents(storage_path('keys/priv_wx.key'));		//私钥
+    		$key=file_get_contents(storage_path('keys/priv_api.key'));		//私钥
     		//openssl_private_decrypt ( string $data , string &$decrypted , mixed $key [, int $padding = OPENSSL_PKCS1_PADDING ] ) : bool
     		$data=base64_decode($data);
+            //echo $data;
     		openssl_private_decrypt($data,$jiemi,$key);
-    		echo "解密的数据为：".$jiemi;
+    		//echo "解密的数据为：".$jiemi;
+            $res='ok';
+            $key2=file_get_contents(storage_path('keys/pub_wx.key'));
+            openssl_public_encrypt($res,$data2,$key2);
+            return $data2;
+            
 
     	}
+
+
+    //验证非对称性签名
+        function  test5(){
+            $sign=$_GET['sign'];
+            //echo $sign."<br>";
+            $data=$_GET['data'];
+            $sign=base64_decode($sign);
+            $key=openssl_pkey_get_public("file://".storage_path('keys/pub_wx.key'));
+            //echo $key;
+           // $key=openssl_pkey_get_private("file://".storage_path('keys/pub_wx.key'));
+            //openssl_verify ( string $data , string $signature , mixed $pub_key_id [, mixed $signature_alg = OPENSSL_ALGO_SHA1 ] ) : int
+            $res=openssl_verify($data,$sign,$key,OPENSSL_ALGO_SHA1);
+            if($res==1){
+                echo "签名验证成功  数据完整";
+            }else if($res==0){
+                echo "数据验证失败  数据损坏";
+            }else{
+                echo "内部错误";
+            }
+           //var_dump($res);
+        }
 }
