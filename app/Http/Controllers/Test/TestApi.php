@@ -102,6 +102,5 @@ class TestApi extends Controller
             }else{
                 echo "内部错误";
             }
-           //var_dump($res);
         }
 }

@@ -43,6 +43,8 @@ Route::any('weather_do','Test\TestController@weather_do');
 // 	Route::any('test1','Test\TestApi@test1');
 // 	//Route::any('saveuser','Api\UserController@saveuser');
 // });
+// 支付宝接口
+Route::any('alipay','Test\GoodsController@alipay');	
 //测试访问量
 Route::any('goods','Test\GoodsController@goods');	
 Route::get('goods2','Test\GoodsController@goods2')->middleware('apibrush');
